@@ -23,13 +23,15 @@ Here is an example of `datastore/dd_config.json`:
   }
 }
 ```
-The hostname must match the hostname of the computer that will be *pinging* this script on your Linode.
+The hostname must match the hostname of the computer that will be *pinging* this script on your Linode. This example assumes a computer at home (which will be pinging the server periodically) is named *fennekin*.
 
 ### Step 2
 Set your `RewriteBase` path in the `.htaccess` file.
 
 ### Step 3
-After the server script is setup (on the Linode), configure your clients. To do so: 
+After the server script is setup (on the Linode), configure your clients.
+
+To do so: 
 
 1. Copy the `sample.dynamic-dns.sh` to some location on your client
 2. Replace the *DOMAIN* and *PATH* markers to mimic your server installation
