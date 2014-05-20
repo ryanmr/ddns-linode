@@ -3,6 +3,7 @@
 
 datastore/dd_*
 client/dynamic-dns*
+.htaccess
 
 # Compiled source #
 ###################
