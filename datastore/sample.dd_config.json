@@ -2,6 +2,6 @@
 	"api_key": "your linode api key", 
 	"token": "some random string of characters",
 	"hosts": {
-		"your computer's hostname": {"domain_id": "your linode domain id", "resource_id": "your linode resource id"}
+		"your computer's hostname": {"domain_id": "your linode domain id", "resource_id": "your linode resource id", "updatable": true}
 	}
 }
