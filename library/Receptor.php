@@ -40,12 +40,9 @@ class DynamicDNS_Receptor {
 
 	private function verify_change($hostname) {
 		$client_ip = $_SERVER['REMOTE_ADDR'];
-		// has not changed
 		if ( $this->datastore->data->hosts->{$hostname}->{'ip'} == $client_ip ) {
 			return false;
 		}
-
-		// has changed
 		return true;
 	}
 
