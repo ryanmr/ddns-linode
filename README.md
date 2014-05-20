@@ -33,7 +33,7 @@ The hostname must match the hostname of the computer that will be *pinging* this
 In the hosts array object, you can additionally define `updatable`; setting that to false will disable Linode DNS updates for that specific host, but the script will still keep a record of it.
 
 ### Step 2
-Copy `sample.htaccess` to `.htaccess`, and set your `RewriteBase` path in the `.htaccess` file.
+Copy `sample.htaccess` to `.htaccess`, and set your `RewriteBase` path in the `.htaccess` file. If you haven't set your `php.ini` date-timezone, you should.
 
 ### Step 3
 After the server script is setup (on the Linode), configure your clients.
