@@ -75,32 +75,40 @@ class DynamicDNS_Receptor {
 			return false;
 		}
 
-		$result = $this->update($hostname);
-		if ( $result ) {
-			Helper::feedback(array("code" => 201, "status" => "dynamic dns successful"));
-		} else {
-			Helper::feedback(array("code" => 500, "status" => "dynamic dns failed"));
-		}
+		$this->update($hostname);
 
+	}
+
+	private function update_data($hostname, $ip) {
+			$this->datastore->data->hosts->{$hostname}->{'ip'} = $ip;
+			$this->datastore->data->hosts->{$hostname}->{'updates'} = $this->datastore->data->hosts->{$hostname}->{'updates'} + 1;
+			$this->datastore->data->hosts->{$hostname}->{'last_update'} = time();
+			$this->datastore->save();
 	}
 
 	private function update($hostname) {
 
 		$ip = $_SERVER['REMOTE_ADDR'];
+		$ip = htmlentities($ip);
 
 		$url = sprintf("%sapi_key=%s&api_action=domain.resource.update&DomainID=%s&ResourceID=%s&Target=%s", LINODE_API, $this->datastore->config->api_key, $this->datastore->config->hosts->{$hostname}->{'domain_id'}, $this->datastore->config->hosts->{$hostname}->{'resource_id'}, $ip);
 		
-		$response = file_get_contents($url);
-		$response_json = json_decode($response);
+		if ( $this->datastore->config->hosts->{$hostname}->updatable == true ) {
+			$response = file_get_contents($url);
+			$response_json = json_decode($response);
 
-		if ( count($response_json->{'ERRORARRAY'}) == 0 ) {
-			$this->datastore->data->hosts->{$hostname}->{'ip'} = $ip;
-			$this->datastore->data->hosts->{$hostname}->{'updates'} = $this->datastore->data->hosts->{$hostname}->{'updates'} + 1;
-			$this->datastore->data->hosts->{$hostname}->{'last_update'} = time();
-			$this->datastore->save();
+			if ( count($response_json->{'ERRORARRAY'}) == 0 ) {
+				$this->update_data($hostname, $ip);
+				Helper::feedback(array("code" => 201, "status" => "dynamic dns record set successfully"));
+				return true;
+			}
+		} else {
+			$this->update_data($hostname, $ip);
+			Helper::feedback(array("code" => 201, "status" => "internal dns set successfully"));
 			return true;
 		}
 
+		Helper::feedback(array("code" => 500, "status" => "dynamic dns failed"));
 		return false;
 
 	}
