@@ -5,8 +5,9 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 
 # handles usual cases, index for viewing, dns for updates
-RewriteRule ^ping/([^/]*)/([^/]*)$ dns.php?token=$1&hostname=$2 [QSA,L]
-RewriteRule ^([^/]*)$ index.php?hostname=$1 [QSA,L]
+RewriteRule ^view-([^/]*)$ index.php?hostname=$1 [L]
+RewriteRule ^ping/([^/]*)/([^/]*)$ dns.php?token=$1&hostname=$2 [QSA]
+
 
 # blocks .git access
 RewriteRule ^(.*/)?\.git+ - [F,L]
