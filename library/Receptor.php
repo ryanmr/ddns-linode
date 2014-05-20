@@ -11,6 +11,15 @@ class DynamicDNS_Receptor {
 	private function is_request_valid() {
 		$hostname = isset($_GET['hostname']) && !empty($_GET['hostname']);
 		$token = isset($_GET['token']) && !empty($_GET['token']);
+
+		/*
+			Limit hostname to just 64 characters, and
+			the token at a maximum if 100; ~12-15 is suggested.
+		*/
+		if ( strlen($hostname) > 64 || strlen($token) > 100 ) {
+			return false;
+		}
+
 		return $hostname && $token;
 	}
 
@@ -45,7 +54,6 @@ class DynamicDNS_Receptor {
 		}
 		return true;
 	}
-
 
 	public function refresh() {
 
@@ -109,6 +117,5 @@ class DynamicDNS_Receptor {
 		return false;
 
 	}
-
 
 }

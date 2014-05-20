@@ -15,6 +15,11 @@ class DynamicDNS_Viewer {
 
 		$hostname = $_GET['hostname'];
 
+		// hostnames are no longer than 63 characters
+		if ( strlen($hostname) > 64 ) {
+			return false;
+		}
+
 		$config = isset( $this->datastore->config->hosts->{$hostname} );
 		$data = isset( $this->datastore->data->hosts->{$hostname} );
 
