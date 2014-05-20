@@ -6,7 +6,10 @@ Dynamic DNS kind of sucks at home, but setting DNS dynamically with your Linode 
 ## Installation
 
 ### Step 1
-Set your Linode API key, your own person key and what hostnames you would like to listen for. Configure these settings in `datastore/dd_config.json`.
+Configure the settings in `datastore/dd_config.json`:
+* Linode API key
+* Your own personal key
+* Hostnames to listen on
 
 Here is an example of `datastore/dd_config.json`:
 ```

@@ -2,6 +2,7 @@
 ################
 
 datastore/dd_*
+client/dynamic-dns*
 
 # Compiled source #
 ###################
