@@ -4,6 +4,7 @@
 		'ip' => $ip,
 		'hostname' => $hostname,
 		'last_update' => $last_update,
+		'last_ping' => $last_ping,
 		'last_update_human' => date('l, F jS, Y; g:i A', $last_update),
 		'updates' => $updates
 	));

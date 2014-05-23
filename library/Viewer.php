@@ -44,6 +44,7 @@ class DynamicDNS_Viewer {
 		$hostname = $_GET['hostname'];
 		$ip = $this->datastore->data->hosts->{$hostname}->{'ip'};
 		$last_update = $this->datastore->data->hosts->{$hostname}->{'last_update'};
+		$last_ping = $this->datastore->data->hosts->{$hostname}->{'last_ping'};
 		$updates = $this->datastore->data->hosts->{$hostname}->{'updates'};
 
 		switch ($type) {

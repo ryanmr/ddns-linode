@@ -30,6 +30,7 @@ class DynamicDNS_Receptor {
 			if ( isset($this->datastore->data->hosts->{$hostname}) == false ) {
 				$obj = new stdClass();
 				$obj->{'last_update'} = 0;
+				$obj->{'last_ping'} = 0;
 				$obj->{'updates'} = 0;
 				$obj->{'ip'} = '';
 				$this->datastore->data->hosts->{$hostname} = $obj;
@@ -76,6 +77,7 @@ class DynamicDNS_Receptor {
 		$data = $this->datastore->data->hosts->{$hostname};
 
 		if ( $this->verify_change($hostname) == false ) {
+			$this->ping_data();
 			Helper::feedback(array("code" => 202, "status" => "host not changed"));
 			return false;
 		}
@@ -84,10 +86,16 @@ class DynamicDNS_Receptor {
 
 	}
 
+	private function ping_data($hostname) {
+		$this->datastore->data->hosts->{$hostname}->{'last_ping'} = time();
+		$this->datastore->save();
+	}
+
 	private function update_data($hostname, $ip) {
 			$this->datastore->data->hosts->{$hostname}->{'ip'} = $ip;
 			$this->datastore->data->hosts->{$hostname}->{'updates'} = $this->datastore->data->hosts->{$hostname}->{'updates'} + 1;
 			$this->datastore->data->hosts->{$hostname}->{'last_update'} = time();
+			$this->datastore->data->hosts->{$hostname}->{'last_ping'} = time();
 			$this->datastore->save();
 	}
 

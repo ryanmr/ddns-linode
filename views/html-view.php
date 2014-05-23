@@ -60,6 +60,7 @@
 
 				<ul>
 					<li><strong>Hostname</strong>: <?php echo $hostname; ?></li>
+					<li><strong>Last Ping (Human)</strong>: <?php echo date('l, F jS, Y; g:i A', $last_ping); ?></li>					
 					<li><strong>Last Update (Human)</strong>: <?php echo date('l, F jS, Y; g:i A', $last_update); ?></li>
 					<li><strong>Updates</strong>: <?php echo $updates; ?></li>
 				</ul>
