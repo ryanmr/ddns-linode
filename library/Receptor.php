@@ -77,7 +77,7 @@ class DynamicDNS_Receptor {
 		$data = $this->datastore->data->hosts->{$hostname};
 
 		if ( $this->verify_change($hostname) == false ) {
-			$this->ping_data();
+			$this->ping_data($hostname);
 			Helper::feedback(array("code" => 202, "status" => "host not changed"));
 			return false;
 		}
