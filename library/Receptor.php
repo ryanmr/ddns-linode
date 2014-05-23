@@ -93,7 +93,7 @@ class DynamicDNS_Receptor {
 
 	private function update_data($hostname, $ip) {
 			$this->datastore->data->hosts->{$hostname}->{'ip'} = $ip;
-			$this->datastore->data->hosts->{$hostname}->{'updates'} = $this->datastore->data->hosts->{$hostname}->{'updates'} + 1;
+			$this->datastore->data->hosts->{$hostname}->{'updates'} = intval($this->datastore->data->hosts->{$hostname}->{'updates'}) + 1;
 			$this->datastore->data->hosts->{$hostname}->{'last_update'} = time();
 			$this->datastore->data->hosts->{$hostname}->{'last_ping'} = time();
 			$this->datastore->save();
