@@ -3,7 +3,7 @@
 class DynamicDNS_Receptor {
 
 	private $datastore;
-
+	
 	public function __construct() {
 		$this->datastore = new DynamicDNS_DataStore(); 
 	}
@@ -115,6 +115,7 @@ class DynamicDNS_Receptor {
 				Helper::feedback(array("code" => 201, "status" => "dynamic dns record set successfully"));
 				return true;
 			}
+
 		} else {
 			$this->update_data($hostname, $ip);
 			Helper::feedback(array("code" => 201, "status" => "internal dns set successfully"));
